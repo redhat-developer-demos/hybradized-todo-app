@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: todo-schema
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: cockroachdb-client
+          image: cockroachdb/cockroach:v20.1.1
+          imagePullPolicy: Always
+          command: ["cockroach"]
+          args:
+            [
+              "sql",
+              "--insecure",
+              "--host=cockroachdb-public",
+              "--execute=create database todo;",
+            ]
+      restartPolicy: Never
+  backoffLimit: 1
