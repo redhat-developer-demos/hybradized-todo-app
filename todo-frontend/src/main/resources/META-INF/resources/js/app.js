@@ -1,5 +1,7 @@
 /*global Vue, todoStorage */
 
+const { todoStorage } = require("./store");
+
 (function (exports) {
 
     'use strict';
@@ -30,7 +32,8 @@
             todos: [],
             newTodo: '',
             editedTodo: null,
-            visibility: 'all'
+            visibility: 'all',
+            currentCloud: ''
         },
 
         computed: {
@@ -70,6 +73,7 @@
                     completed: false
                 });
                 this.todos.push(item);
+                this.currentCloud = await todoStorage.fetchcloud()
                 this.newTodo = '';
             },
 

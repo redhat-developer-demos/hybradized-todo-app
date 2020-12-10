@@ -23,6 +23,11 @@ public interface BackendService {
     public Response opt();
 
     @GET
+    @Path("/cloud")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getCloud();
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Todo> getAll();
 

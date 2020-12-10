@@ -64,7 +64,7 @@ echo "Skupper Network Cluster"
 ./skupper init
 
 kubectl wait --for=condition=ready pod -l application=skupper
-kubectl wait --for=condition=ready pod -l application=skupper-router
+kubectl wait --for=condition=ready pod -l application=skupper-router --timeout=90s
 
 echo "Skupper Exposing"
 
@@ -75,7 +75,9 @@ echo "Generate Cloud Token"
 
 ./skupper connection-token token.yaml
 
-kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-0
-kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-1
-kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-2
-kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-3
+sleep 10
+
+kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-0 --timeout=90s
+kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-1 --timeout=90s
+kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-2 --timeout=120s
+kubectl wait --for=condition=ready pod/cockroachdb-internal-g1-proxy-3 --timeout=120s

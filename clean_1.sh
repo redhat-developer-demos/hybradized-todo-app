@@ -11,6 +11,3 @@ kubectl delete pvc datadir-cockroachdb-g1-0
 kubectl delete pvc datadir-cockroachdb-g1-1
 kubectl delete pvc datadir-cockroachdb-g1-2
 kubectl delete pvc datadir-cockroachdb-g1-3
-
-kubectl delete pvc datadir-cockroachdb-g2-0
-kubectl delete pvc datadir-cockroachdb-g2-1

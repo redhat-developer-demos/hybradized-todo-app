@@ -26,6 +26,11 @@
         },
         deleteCompleted: async function() {
             await axios.delete(serverUrl);
+        },
+        fetchcloud: async function () {
+            const response = await axios.get(serverUrl + "cloud");
+            console.log("Fectched Cloud" + response.data);
+            return response.data;
         }
     };
 

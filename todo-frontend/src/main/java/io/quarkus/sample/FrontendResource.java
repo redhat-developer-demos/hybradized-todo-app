@@ -35,6 +35,13 @@ public class FrontendResource {
     }
 
     @GET
+    @Path("/cloud")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getCloud() {
+        return backendService.getCloud();
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Todo getOne(@PathParam("id") Long id) {
