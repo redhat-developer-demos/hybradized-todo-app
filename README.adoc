@@ -1,0 +1,39 @@
+= Hybrid Cloud Quarkus/CockroachDB/Skupper
+
+This demo deploys a Quarkus TODO app in an hybrid cloud using Skupper and Kubernetes/OpenShift.
+The database used is CockroachDB as it is a database that fits perfectly the needs of replication information across different clusters.
+
+== Preparing
+
+Rename the `.env.example` to `.env` and fill with the information required to access to your clusters.
+
+== 2 backends (1 in each cluster) & 1 DB (primary cluster)
+
+[source, shell]
+----
+make create_namespace_1 
+make create_namespace_2 
+make deploy_single_cockroachdb 
+make db 
+make deploy_backend_1 
+make frontend_1 
+make expose_1 
+
+make backend_cluster_1 
+make backend_cluster_2 
+make deploy_backend_2
+----
+
+== 1 backend & 2 DB (primary cluster and replica cluster)
+
+[source, shell]
+----
+make create_namespace_1 
+make create_namespace_2 
+make cluster_1 
+make cluster_2 
+make db 
+make backend 
+make frontend 
+make expose
+----

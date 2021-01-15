@@ -74,11 +74,17 @@ backend_cluster_1: oc_login_1
 backend_cluster_2: oc_login_2
 	./skupperize-backend-2.sh
 
+create_namespace_1: oc_login_1
+	kubectl create namespace todo
+
+create_namespace_2: oc_login_2
+	kubectl create namespace todo
+
 ## You can only one of the next commands
 
 # To use the demo with failover on persistence layer (cockroachdb cluster) 
-cockroach-hybrid: cluster_1 cluster_2 db backend frontend expose
+cockroach-hybrid: create_namespace_1 create_namespace_2 cluster_1 cluster_2 db backend frontend expose
 
 # To use the demo with failover in the backend
 
-backend-hybrid: deploy_single_cockroachdb db deploy_backend_1 frontend_1 expose_1 backend_cluster_1 backend_cluster_2 deploy_backend_2
+backend-hybrid: create_namespace_1 create_namespace_2 deploy_single_cockroachdb db deploy_backend_1 frontend_1 expose_1 backend_cluster_1 backend_cluster_2 deploy_backend_2
