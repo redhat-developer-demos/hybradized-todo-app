@@ -37,7 +37,7 @@ public class TodoResource {
 
     @GET
     @Path("/cloud")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Operation(description = "Gets Cloud Id")
     public String getCloudId() {
         return cloudId;

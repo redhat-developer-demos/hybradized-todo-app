@@ -4,7 +4,7 @@ set -eu
 
 set -o pipefail
 
-curl -fL https://github.com/skupperproject/skupper/releases/download/0.3.2/skupper-cli-0.3.2-mac-amd64.tgz | tar -xzf -
+curl -fL https://github.com/skupperproject/skupper/releases/download/0.4.1/skupper-cli-0.4.1-mac-amd64.tgz | tar -xzf -
 
 echo "Skupper Network Cluster"
 

@@ -1,7 +1,4 @@
 /*global Vue, todoStorage */
-
-const { todoStorage } = require("./store");
-
 (function (exports) {
 
     'use strict';
@@ -33,7 +30,7 @@ const { todoStorage } = require("./store");
             newTodo: '',
             editedTodo: null,
             visibility: 'all',
-            currentCloud: ''
+            currentCloud: '',
         },
 
         computed: {

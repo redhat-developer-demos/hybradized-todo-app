@@ -29,7 +29,7 @@
         },
         fetchcloud: async function () {
             const response = await axios.get(serverUrl + "cloud");
-            console.log("Fectched Cloud" + response.data);
+            console.log("Fetched Cloud" + response.data);
             return response.data;
         }
     };
