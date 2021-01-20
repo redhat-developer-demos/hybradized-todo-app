@@ -63,6 +63,8 @@ echo "Skupper Network Cluster"
 
 ./skupper init
 
+sleep 10
+
 kubectl wait --for=condition=ready pod -l application=skupper
 kubectl wait --for=condition=ready pod -l application=skupper-router --timeout=90s
 

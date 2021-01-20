@@ -37,3 +37,67 @@ make backend
 make frontend 
 make expose
 ----
+
+== Local Deployment Single Node
+
+You can run the application on local machine with a single CockroachDB node.
+
+You need do have Docker running to start CockroachDB.
+
+Open 3 terminal windows:
+
+[source, shell]
+.Terminal 1 (Cockroach)
+----
+ docker run -ti --rm --name roach -p 8888:8080 -p 26257:26257 cockroachdb/cockroach:v20.2.3 start --insecure
+----
+
+[source, shell]
+.Terminal 2(Create DB)
+----
+docker exec -ti roach ./cockroach sql --insecure --execute="CREATE DATABASE todo;"
+----
+
+[source, shell]
+.Terminal 2 (Start Backend)
+----
+cd todo-backend
+
+./mvnw clean package -DskipTests
+java -Dquarkus.http.port=9090 -Dquarkus.datasource.jdbc.url=jdbc:postgresql://localhost:26257/todo -jar target/todo-backend-1.0.0-runner.jar
+----
+
+[source, shell]
+.Terminal 3 (Start Frontend)
+----
+cd todo-frontend
+
+./mvnw clean package -DskipTests
+java -Dio.quarkus.sample.BackendService/mp-rest/url=http://localhost:9090 -jar target/todo-frontend-1.0.0-runner.jar
+----
+
+Open a browser and access to http://localhost:8080/todo.html
+
+== Local Dev mode
+
+If you want to run the demo in Quarkus dev mode you can do it as in this mode the backends are configured in different ports and embedded H2 is used instead of CockroachDB.
+
+Open two terminals:
+
+[source, shell]
+.Terminal 1
+----
+cd todo-backend
+
+./mvnw compile quarkus:dev
+----
+
+[source, shell]
+.Terminal 2
+----
+cd todo-frontend
+
+./mvnw compile quarkus:dev
+----
+
+Open a browser and access to http://localhost:8080/todo.html
