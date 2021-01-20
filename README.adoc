@@ -42,7 +42,7 @@ make expose
 
 You can run the application on local machine with a single CockroachDB node.
 
-You need do have Docker running to start CockroachDB.
+You need to have Docker running to start CockroachDB.
 
 Open 3 terminal windows:
 
