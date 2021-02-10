@@ -27,6 +27,34 @@ else
 	oc project todo
 endif
 
+.PHONY: oc_login_1_namespace
+oc_login_1_namespace:
+ifdef OC_TOKEN_1
+	$(info **** Using OC_TOKEN for login ****)
+	oc login ${OC_URL_1} --token=${OC_TOKEN_1}
+	kubectl create namespace todo
+	oc project todo
+else
+	$(info **** Using OC_USER and OC_PASSWORD for login ****)
+	oc login ${OC_URL_1} -u ${OC_USER_1} -p ${OC_PASSWORD_1} --insecure-skip-tls-verify=true
+	kubectl create namespace todo
+	oc project todo
+endif
+
+.PHONY: oc_login_2_namespace
+oc_login_2_namespace:
+ifdef OC_TOKEN_2
+	$(info **** Using OC_TOKEN for login ****)
+	oc login ${OC_URL_2} --token=${OC_TOKEN_2}
+	kubectl create namespace todo
+	oc project todo
+else
+	$(info **** Using OC_USER and OC_PASSWORD for login ****)
+	oc login ${OC_URL_2} -u ${OC_USER_2} -p ${OC_PASSWORD_2} --insecure-skip-tls-verify=true
+	kubectl create namespace todo
+	oc project todo
+endif
+
 cluster_1: oc_login_1
 	./deploy-g1.sh
 
@@ -74,11 +102,9 @@ backend_cluster_1: oc_login_1
 backend_cluster_2: oc_login_2
 	./skupperize-backend-2.sh
 
-create_namespace_1: oc_login_1
-	kubectl create namespace todo
+create_namespace_1: oc_login_1_namespace
 
-create_namespace_2: oc_login_2
-	kubectl create namespace todo
+create_namespace_2: oc_login_2_namespace
 
 ## You can only one of the next commands
 

@@ -6,7 +6,7 @@ set -o pipefail
 
 printf "\n\n######## Main CockroachDB cluster ########\n"
 
-curl -fL https://github.com/skupperproject/skupper/releases/download/0.4.1/skupper-cli-0.4.1-mac-amd64.tgz | tar -xzf -
+curl -fL https://github.com/skupperproject/skupper/releases/download/${SKUPPER_VERSION}/skupper-cli-${SKUPPER_VERSION}-mac-amd64.tgz | tar -xzf -
 
 echo "Deploying the CockroachDB G1 cluster"
 
